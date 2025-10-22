@@ -37,7 +37,7 @@ class ExploreCustomAppBar extends StatelessWidget implements PreferredSizeWidget
                         backgroundColor: Colors.white,
 
                         prefix: SVGAssetHandler(
-                          boxFit: BoxFit.fill,
+                          boxFit: BoxFit.scaleDown,
                           svgPath: AssetsData.searchIcon,
                           svgWidth: 14.w,
                           svgheight: 14.h,
@@ -49,7 +49,7 @@ class ExploreCustomAppBar extends StatelessWidget implements PreferredSizeWidget
 
                         perfixPadding: EdgeInsets.only(
                           left: 12.w,
-                          right: 8.w,
+                          right: 3.w,
                           top: 0.h,
                           bottom: 0.h,
                         ),

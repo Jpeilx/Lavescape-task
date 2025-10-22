@@ -21,4 +21,10 @@ class AssetsData {
   static const String searchIcon = 'assets/icons/search_icon.svg';
   static const String bellIcon = 'assets/icons/bell_icon.svg';
   static const String filterIcon = 'assets/icons/filter_icon.svg';
+  static const String arrowLeftIcon = 'assets/icons/arrow_left_icon.svg';
+  static const String calenderDaysIcon = 'assets/icons/calendar_days_icon.svg';
+  static const String previousMonthButtonIcon = 'assets/icons/previous_month_button_icon.svg';
+  static const String nextMonthButtonIcon = 'assets/icons/next_month_button_icon.svg';
+  static const String plusIcon = 'assets/icons/plus_icon.svg';
+  static const String minusIcon = 'assets/icons/minus_icon.svg';
   }

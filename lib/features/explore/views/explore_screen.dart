@@ -90,7 +90,6 @@ class _ExploreScreenState extends State<ExploreScreen>
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
-            // Pinned CategoriesTabBar at the top
             SliverPersistentHeader(
               pinned: true,
               delegate: _CategoriesTabBarDelegate(

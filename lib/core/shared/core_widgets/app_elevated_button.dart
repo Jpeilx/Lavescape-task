@@ -35,7 +35,7 @@ class AppElevatedButton extends StatelessWidget {
     this.background,
     this.borderWidth = 1,
     this.height = 48,
-    this.borderRaduis = 10,
+    this.borderRaduis = 8,
     this.width = 176,
     this.enabledBorder = true,
     this.elevation,
@@ -49,16 +49,16 @@ class AppElevatedButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       style: ButtonStyle(
-        minimumSize: MaterialStateProperty.all(Size(width.w, height.h)),
-        shadowColor: MaterialStateProperty.resolveWith<Color?>(
+        minimumSize: WidgetStateProperty.all(Size(width.w, height.h)),
+        shadowColor: WidgetStateProperty.resolveWith<Color?>(
             (states) => AppColors.kTansparentColor),
-        backgroundColor: MaterialStateProperty.resolveWith<Color?>(
+        backgroundColor: WidgetStateProperty.resolveWith<Color?>(
             (states) => background ?? AppColors.kPrimaryColor),
         elevation:
-            MaterialStateProperty.resolveWith<double?>((states) => elevation),
-        shape: MaterialStateProperty.resolveWith(
+            WidgetStateProperty.resolveWith<double?>((states) => elevation),
+        shape: WidgetStateProperty.resolveWith(
           (states) {
-            if (states.contains(MaterialState.pressed)) {
+            if (states.contains(WidgetState.pressed)) {
               return RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(borderRaduis.r),
                 side: BorderSide(
@@ -67,7 +67,7 @@ class AppElevatedButton extends StatelessWidget {
                 ),
               );
             }
-            if (states.contains(MaterialState.hovered)) {
+            if (states.contains(WidgetState.hovered)) {
               return RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(borderRaduis.r),
                 side: BorderSide(
@@ -102,7 +102,7 @@ class AppElevatedButton extends StatelessWidget {
                   ],
                 Text(
                   title,
-                  style: getMediumStyle(
+                  style: getSemiBoldStyle(
                       fontSize: fontSize,
                       color: titleColor ?? AppColors.kWhiteColor,
                       fontFamily: FontConstants.interFontfamily),
@@ -135,7 +135,7 @@ class AppElevatedButton extends StatelessWidget {
                   ],
                 Text(
                   title,
-                  style: getMediumStyle(
+                  style: getSemiBoldStyle(
                       fontSize: fontSize,
                       color: titleColor ?? AppColors.kWhiteColor,
                       fontFamily: FontConstants.interFontfamily),

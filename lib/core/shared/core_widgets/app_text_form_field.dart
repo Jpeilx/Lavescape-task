@@ -81,10 +81,10 @@ class AppTextFormField extends StatelessWidget {
           : null,
       enabled: enabled ?? true,
       controller: controller,
-      cursorColor: AppColors.kPrimaryColor,
+      cursorColor: AppColors.kOutlinedGrayColor,
       style: getMediumStyle(
-              fontSize: FontSize.s14,
-              color: AppColors.kPrimaryColor,
+              fontSize: FontSize.s15,
+              color: AppColors.kOutlinedGrayColor,
               fontFamily: FontConstants.interFontfamily)
           .copyWith(
         decorationThickness: 0,
