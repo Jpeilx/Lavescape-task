@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:lavescape/core/shared/core_widgets/app_elevated_button.dart';
 import 'package:lavescape/core/shared/ui_widgets/categories_tap_bar.dart';
 import 'package:lavescape/core/utils/colors/app_colors.dart';
 import 'package:lavescape/core/utils/helper/spacing.dart';
+import 'package:lavescape/core/utils/router/app_router.dart';
 import 'package:lavescape/core/utils/styles/font_manager.dart';
 import 'package:lavescape/features/search/views/widgets/date_range_picker_widget.dart';
 import 'package:lavescape/features/search/views/widgets/guest_counter_widget.dart';
@@ -81,14 +83,12 @@ class _SearchScreenState extends State<SearchScreen>
   }
 
   void _handleSearch() {
-    // TODO: Navigate to results screen
-    debugPrint('Search pressed');
-    debugPrint('Location: ${locationController.text}');
-    debugPrint('Date Range: $selectedDateRange');
-    debugPrint('Adults: $adultsCount, Children: $childrenCount');
-
-    // Placeholder for navigation to results screen
-    // Navigator.push(context, MaterialPageRoute(builder: (context) => SearchResultsScreen(...)));
+    GoRouter.of(context).push(AppRouter.kSearchResultView, extra: {
+      'location': locationController.text,
+      'dateRange': selectedDateRange,
+      'adults': adultsCount,
+      'children': childrenCount,
+    });
   }
 
   int get _totalGuests => adultsCount + childrenCount;
@@ -164,10 +164,10 @@ class _SearchScreenState extends State<SearchScreen>
                     isExpanded: showGuestDetails,
                   ),
 
-                  if (showGuestDetails)...[
+                  if (showGuestDetails) ...[
                     verticalSpace(4),
                     Padding(
-                      padding:  EdgeInsets.symmetric(horizontal: 20.w),
+                      padding: EdgeInsets.symmetric(horizontal: 20.w),
                       child: GuestDetailsWidget(
                         adults: adultsCount,
                         children: childrenCount,
@@ -197,14 +197,13 @@ class _SearchScreenState extends State<SearchScreen>
                         },
                       ),
                     ),
-                  ]
-                   ,verticalSpace(30),
-                    RecentSearchWidget(),
+                  ],
+                  verticalSpace(30),
+                  RecentSearchWidget(),
                 ],
               ),
             ),
           ),
-          
 
           Container(
             padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
@@ -239,8 +238,7 @@ class _SearchScreenState extends State<SearchScreen>
                       onPressed: _handleSearch,
                       background: AppColors.kPrimaryColor,
                       titleColor: AppColors.kWhiteColor,
-                      
-                      
+                       
                       width: double.infinity,
                       height: 38.h,
                       fontSize: FontSize.s15,

@@ -55,7 +55,7 @@ class _ExploreScreenState extends State<ExploreScreen>
   final List<LavescapeModel> laveScapeDummyData = const [
     LavescapeModel(
       imageUrls: [
-        'https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?w=800',
+        'https://media.istockphoto.com/id/1145064928/photo/tourist-riding-camel-in-desert.jpg?s=612x612&w=0&k=20&c=zZpS5SxgBNFhI5kb-oBnf2CL4RyBcRKgCGrImtKs7dw=',
         'https://images.unsplash.com/photo-1512632578888-169bbbc64f33?w=800',
         'https://images.unsplash.com/photo-1570939274717-7eda259b50ed?w=800',
         'https://images.unsplash.com/photo-1580674684081-7617fbf3d745?w=800',
@@ -66,7 +66,7 @@ class _ExploreScreenState extends State<ExploreScreen>
       price: 69.99,
       rating: 4.81,
       isGuestFavorite: true,
-      isWishlisted: false,
+      isWishlisted: false, latitude: 34, longitude: 34,
     ),
     LavescapeModel(
       imageUrls: [
@@ -78,7 +78,7 @@ class _ExploreScreenState extends State<ExploreScreen>
       price: 89.99,
       rating: 4.95,
       isWishlisted: true,
-      isGuestFavorite: false,
+      isGuestFavorite: false, latitude: 443, longitude: 34334,
     ),
     // Add more dummy data as needed
   ];

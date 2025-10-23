@@ -6,6 +6,9 @@ class LavescapeModel {
   final double rating;
   final bool isGuestFavorite;
   final bool isWishlisted;
+  final double latitude;
+  final double longitude;
+
  const LavescapeModel({
     required this.imageUrls,
     required this.title,
@@ -14,5 +17,7 @@ class LavescapeModel {
     required this.rating,
     required this.isGuestFavorite,
     required this.isWishlisted,
+    required this.latitude,
+    required this.longitude,
   });
 }

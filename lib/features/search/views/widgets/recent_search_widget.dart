@@ -5,7 +5,7 @@ import 'package:lavescape/core/utils/colors/app_colors.dart';
 import 'package:lavescape/core/utils/helper/spacing.dart';
 import 'package:lavescape/core/utils/styles/font_manager.dart';
 import 'package:lavescape/core/utils/styles/text_style_manger.dart';
-import 'package:lavescape/features/search/models/recent_search_item.dart';
+import 'package:lavescape/features/search/data/models/recent_search_item.dart';
 
 class RecentSearchWidget extends StatelessWidget {
   const RecentSearchWidget({super.key});

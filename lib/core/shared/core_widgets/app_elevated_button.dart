@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lavescape/core/shared/core_widgets/svg_asset_handle.dart';
 import 'package:lavescape/core/utils/colors/app_colors.dart';
+import 'package:lavescape/core/utils/helper/spacing.dart';
 import 'package:lavescape/core/utils/styles/font_manager.dart';
 import 'package:lavescape/core/utils/styles/text_style_manger.dart';
 
@@ -23,6 +24,7 @@ class AppElevatedButton extends StatelessWidget {
   String? iconPath;
   bool iconStart;
   double marginStart;
+
 
   AppElevatedButton({
     Key? key,
@@ -49,6 +51,7 @@ class AppElevatedButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       style: ButtonStyle(
+        padding:WidgetStateProperty.all(EdgeInsets.all(0),) ,
         minimumSize: WidgetStateProperty.all(Size(width.w, height.h)),
         shadowColor: WidgetStateProperty.resolveWith<Color?>(
             (states) => AppColors.kTansparentColor),
@@ -127,11 +130,11 @@ class AppElevatedButton extends StatelessWidget {
                   if (iconPath != null) ...[
                     SVGAssetHandler(
                       svgPath: iconPath!,
-                      svgWidth: 24.w,
-                      svgheight: 24.h,
+                      svgWidth: 14.w,
+                      svgheight: 14.h,
                       boxFit: BoxFit.cover,
                     ),
-                    SizedBox(width: 10.w),
+                horizontalSpace(3)
                   ],
                 Text(
                   title,

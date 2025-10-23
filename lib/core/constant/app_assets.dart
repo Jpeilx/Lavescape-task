@@ -1,8 +1,8 @@
 class AssetsData {
   //images 
+  static const String logoLavender = 'assets/images/logo_lavender_image.svg';
   static const String noImage = 'assets/images/No_image_available.png';
   static const String backgroundButtomImage = 'assets/images/background_buttom_image.jpg';
-
   //icons
   static const String exploreIcon = 'assets/icons/explore_icon.svg';
   static const String inboxIcon = 'assets/icons/inbox_icon.svg';
@@ -27,4 +27,20 @@ class AssetsData {
   static const String nextMonthButtonIcon = 'assets/icons/next_month_button_icon.svg';
   static const String plusIcon = 'assets/icons/plus_icon.svg';
   static const String minusIcon = 'assets/icons/minus_icon.svg';
-  }
+  static const String xIcon = 'assets/icons/x_icon.svg';
+  static const String mapIcon = 'assets/icons/map_icon.svg';
+  static const String eyeIcon = 'assets/icons/eye_icon.svg';
+  static const String eyeOffIcon = 'assets/icons/eye_off_icon.svg';
+  static const String arrowDownIcon = 'assets/icons/arrow_down_icon.svg';
+  static const String facebookIcon = 'assets/icons/facebook_icon.svg';
+  static const String googleIcon = 'assets/icons/google_icon.svg';
+  static const String emailIcon = 'assets/icons/email_icon.svg';
+  static const String appleIcon = 'assets/icons/apple_icon.svg';
+  static const String phoneIcon = 'assets/icons/phone_icon.svg';
+  static const String editPinIcon = 'assets/icons/edit_pin_icon.svg';
+  static const String keyIcon = 'assets/icons/key_icon.svg';
+  static const String authCalendarIcon = 'assets/icons/auth_calendar_icon.svg';
+  static const String checkmarkIcon = 'assets/icons/checkmark_icon.svg';
+  
+
+}

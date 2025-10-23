@@ -12,6 +12,8 @@ class AppColors {
   static const kScaffoldFillColor = Color(0xffFAFAFA);
   static const kLightGrayColor = Color(0xffF8FAFC);
   static const kLightGrayColor2 = Color(0xffD1D5DB);
+  static const kLightGrayColor3 = Color(0xffD9D9D9);
+  static const kLightGrayColor4 = Color(0xff475467);
 
 
   static const kDarkPrimaryColor = Color(0xff2B2D3F);
