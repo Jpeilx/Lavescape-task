@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lavescape/core/constant/app_assets.dart';
@@ -218,11 +219,24 @@ class _LoginScreenState extends State<LoginScreen> {
                               GoRouter.of(
                                 context,
                               ).push(AppRouter.kAppLayoutView);
+
+                              SystemChrome.setSystemUIOverlayStyle(
+                                const SystemUiOverlayStyle(
+                                  statusBarColor: AppColors.kPrimaryColor,
+                                  statusBarIconBrightness: Brightness.dark,
+                                  systemNavigationBarColor:
+                                      AppColors.kWhiteColor,
+                                  systemNavigationBarIconBrightness:
+                                      Brightness.dark,
+                                ),
+                              );
                             }
                           },
                         ),
 
-                        verticalSpace(220),
+                        emailHasError || passwordHasError
+                            ? verticalSpace(200)
+                            : verticalSpace(230),
                         Align(
                           alignment: AlignmentDirectional.bottomCenter,
                           child: const NeedAnAccountText(),

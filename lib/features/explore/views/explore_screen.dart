@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lavescape/core/constant/app_assets.dart';
+import 'package:lavescape/core/shared/core_widgets/app_elevated_button.dart';
 import 'package:lavescape/core/shared/models/lavescape_model.dart';
 import 'package:lavescape/core/shared/ui_widgets/categories_tap_bar.dart';
 import 'package:lavescape/core/shared/ui_widgets/lavescape_card_view.dart/lavescape_card_view.dart';
 import 'package:lavescape/core/utils/colors/app_colors.dart';
+import 'package:lavescape/core/utils/styles/font_manager.dart';
 import 'package:lavescape/features/explore/views/widgets/explore_custom_App_bar.dart';
 
 class ExploreScreen extends StatefulWidget {
@@ -47,7 +50,6 @@ class _ExploreScreenState extends State<ExploreScreen>
 
   @override
   void dispose() {
-
     tabController.dispose();
     super.dispose();
   }
@@ -66,7 +68,9 @@ class _ExploreScreenState extends State<ExploreScreen>
       price: 69.99,
       rating: 4.81,
       isGuestFavorite: true,
-      isWishlisted: false, latitude: 34, longitude: 34,
+      isWishlisted: false,
+      latitude: 34,
+      longitude: 34,
     ),
     LavescapeModel(
       imageUrls: [
@@ -78,7 +82,9 @@ class _ExploreScreenState extends State<ExploreScreen>
       price: 89.99,
       rating: 4.95,
       isWishlisted: true,
-      isGuestFavorite: false, latitude: 443, longitude: 34334,
+      isGuestFavorite: false,
+      latitude: 443,
+      longitude: 34334,
     ),
     // Add more dummy data as needed
   ];
@@ -86,9 +92,11 @@ class _ExploreScreenState extends State<ExploreScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: ExploreCustomAppBar() ,
+      
+      appBar: ExploreCustomAppBar(),
       body: SafeArea(
         child: CustomScrollView(
+          physics: BouncingScrollPhysics(),
           slivers: [
             SliverPersistentHeader(
               pinned: true,
@@ -159,6 +167,25 @@ class _ExploreScreenState extends State<ExploreScreen>
                 ),
               ),
           ],
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(bottom: 15),
+        child: SizedBox(
+          width: 100.w,
+          child: AppElevatedButton(
+            title: 'Map View',
+            onPressed: () {},
+            background: AppColors.kPrimaryColor,
+            titleColor: AppColors.kWhiteColor,
+            marginStart: 8,
+            width: 100.w,
+            height: 32.h,
+            fontSize: FontSize.s14,
+            iconStart: true,
+            iconPath: AssetsData.mapIcon,
+          ),
         ),
       ),
     );

@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lavescape/core/constant/app_assets.dart';
 import 'package:lavescape/core/shared/core_widgets/svg_asset_handle.dart';
 import 'package:lavescape/core/utils/colors/app_colors.dart';
+import 'package:lavescape/core/utils/functions/repeated_functions.dart';
 import 'package:lavescape/core/utils/helper/spacing.dart';
 import 'package:lavescape/core/utils/styles/font_manager.dart';
 import 'package:lavescape/core/utils/styles/text_style_manger.dart';
@@ -36,34 +37,7 @@ class _DateRangePickerWidgetState extends State<DateRangePickerWidget> {
     }
   }
 
-  String _formatDateRange(DateTimeRange? range) {
-    if (range == null) return 'Select Date';
 
-    // Format dates manually without intl package
-    const months = [
-      'Jan',
-      'Feb',
-      'Mar',
-      'Apr',
-      'May',
-      'Jun',
-      'Jul',
-      'Aug',
-      'Sep',
-      'Oct',
-      'Nov',
-      'Dec',
-    ];
-    final startMonth = months[range.start.month - 1];
-    final startDay = range.start.day;
-    final endMonth = months[range.end.month - 1];
-    final endDay = range.end.day;
-
-    if (range.start.month == range.end.month) {
-      return '$startMonth $startDay-$endDay';
-    }
-    return '$startMonth $startDay - $endMonth $endDay';
-  }
 
 
   @override
@@ -105,7 +79,7 @@ class _DateRangePickerWidgetState extends State<DateRangePickerWidget> {
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 16.w),
                       child: Text(
-                        _formatDateRange(widget.dateRange),
+                        RepeatedFunctions.formatDateRange(widget.dateRange),
                         style: getMediumStyle(
                           fontSize: FontSize.s15,
                           color: AppColors.kBlackTextColor,

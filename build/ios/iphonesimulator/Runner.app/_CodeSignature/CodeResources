@@ -46,7 +46,7 @@
 		</data>
 		<key>Frameworks/App.framework/App</key>
 		<data>
-		IoIC/wwDftpa8ozmeAwWFTt2gE0=
+		3TmYIh0q/kZnViWBL7GhDbQDZZc=
 		</data>
 		<key>Frameworks/App.framework/Info.plist</key>
 		<data>
@@ -54,7 +54,7 @@
 		</data>
 		<key>Frameworks/App.framework/_CodeSignature/CodeResources</key>
 		<data>
-		wBFsXf3WaOMWzqhq7joPeOrhEvY=
+		RT+ipL6Zua8UjQN67IwN0V0e4b8=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/.env</key>
 		<data>
@@ -62,11 +62,11 @@
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.bin</key>
 		<data>
-		hHfJESXSc303sBKBHMxyP9PCE9k=
+		SRcbNjAa5N8XqFSMRDTjqjdFepU=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.json</key>
 		<data>
-		3OgtSG2DpXUIBCjZ26JQDuSAamg=
+		+G3tiOc/mcixP1KJPhUSIWuPWy0=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/FontManifest.json</key>
 		<data>
@@ -116,6 +116,10 @@
 		<data>
 		Qf4k6F1DZHNuT5k+NqJ4TUF0vqU=
 		</data>
+		<key>Frameworks/App.framework/flutter_assets/assets/icons/auth_calendar_icon.svg</key>
+		<data>
+		wTrC6vZ6yQxTM96GoAG+CFOSaYM=
+		</data>
 		<key>Frameworks/App.framework/flutter_assets/assets/icons/bell_icon.svg</key>
 		<data>
 		FliDeCJfq6I+yLbkCaK1krvGdSw=
@@ -127,6 +131,10 @@
 		<key>Frameworks/App.framework/flutter_assets/assets/icons/camel_riding_icon.svg</key>
 		<data>
 		IKoo5cpXaX8UVaUV+tB22z9OamE=
+		</data>
+		<key>Frameworks/App.framework/flutter_assets/assets/icons/checkmark_icon.svg</key>
+		<data>
+		P1dkcyx6D8yXKsul3DnuqAsvWys=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/assets/icons/coffee_brewing_icon.svg</key>
 		<data>
@@ -188,6 +196,14 @@
 		<data>
 		6oKwpr0sw8Ek16GJBjg0+f4pwK8=
 		</data>
+		<key>Frameworks/App.framework/flutter_assets/assets/icons/key_icon.svg</key>
+		<data>
+		FQIu39W335M1HS+bQpDkwTlF31U=
+		</data>
+		<key>Frameworks/App.framework/flutter_assets/assets/icons/list_icon.svg</key>
+		<data>
+		aVBLPDC4BCXT3XwXpiZr7CnCEnM=
+		</data>
 		<key>Frameworks/App.framework/flutter_assets/assets/icons/map_icon.svg</key>
 		<data>
 		tWer/75o0NDRL4Qh/S8VUrxyGlY=
@@ -218,7 +234,7 @@
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/assets/icons/profile_icon.svg</key>
 		<data>
-		U9ZXm90Hcu3R7DL3R8Fvgzoy9fs=
+		/hUnEf6p35z0Cd+QUKLZ3U7Bh1I=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/assets/icons/reservation_icon.svg</key>
 		<data>
@@ -258,7 +274,7 @@
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/kernel_blob.bin</key>
 		<data>
-		OR+Ru9SC1PxJDVi6m8C3xO/lpEc=
+		VTJpmatRXYeatAnDq4NzP1BB63Q=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/packages/country_code_picker/flags/ad.png</key>
 		<data>
@@ -2597,7 +2613,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			tlJPF5ILV3dWbaMMdtxz4zt1B5Prg5uCOEbafz5nenM=
+			TPvreZ0SXr/1iyma6bubHEqoFiqequ0K0BnfXgSTAkg=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/Info.plist</key>
@@ -2611,7 +2627,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			0OdfG6Q1zenL0NMu/R5izI+hOEwQx9K7kNHBQtV/BX8=
+			8Wu+KGoI4sqDzIu3EFEfI9usbIE0ymAtiCyC0XAraV0=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/.env</key>
@@ -2625,14 +2641,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			stRODDyEJnTsbAV6cpZ0vSMAcW4uXKW7wdJRQgBzct4=
+			B9CHRe9EjjovOwikFfbQ0O42yrI2HjpfQSLSnITo9N4=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			pjxCDFunWE2ME16BFuF3BWtrE8M2OnvFzD3EKYqJUfU=
+			MmuKLCn5/KOBqvHi63NudnOb6zQ9Rd5+4Qr7/VSYOik=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/FontManifest.json</key>
@@ -2719,6 +2735,13 @@
 			KWgiKxr3i+dQVBgPYvRigNT0xhWdoqi+eMnJ1u5Lh5U=
 			</data>
 		</dict>
+		<key>Frameworks/App.framework/flutter_assets/assets/icons/auth_calendar_icon.svg</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			OxXRxNMp14+cxdvBZCwouCU5XoamjANCQKqymvlkEh0=
+			</data>
+		</dict>
 		<key>Frameworks/App.framework/flutter_assets/assets/icons/bell_icon.svg</key>
 		<dict>
 			<key>hash2</key>
@@ -2738,6 +2761,13 @@
 			<key>hash2</key>
 			<data>
 			nM/PsbbI79BE4kkxdpTiJ6JLuMVFZcKyawoanQfzmT8=
+			</data>
+		</dict>
+		<key>Frameworks/App.framework/flutter_assets/assets/icons/checkmark_icon.svg</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			xYgwRZ4lRCEiocPpJ9YR9KYiGVR3dZscKIVXW3mNHxg=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/assets/icons/coffee_brewing_icon.svg</key>
@@ -2845,6 +2875,20 @@
 			ivuaG4H5jA/A8I9kykrIc4nWCJ2igoVvJBmGC7zktj4=
 			</data>
 		</dict>
+		<key>Frameworks/App.framework/flutter_assets/assets/icons/key_icon.svg</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			HeeuC+5mFiv0GKL2wW3N5LCHUntX9+h4DWkWldSCU/I=
+			</data>
+		</dict>
+		<key>Frameworks/App.framework/flutter_assets/assets/icons/list_icon.svg</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			+LIFtkgizLK7ETQGjCe0GsreAeVUOChVE2wXJt6jamo=
+			</data>
+		</dict>
 		<key>Frameworks/App.framework/flutter_assets/assets/icons/map_icon.svg</key>
 		<dict>
 			<key>hash2</key>
@@ -2898,7 +2942,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			RiNj1FfODwtMd05rsgyWxpRigyzl9R1QiYAHxAp0VoU=
+			tksdyeA9gwxmnpV7d5Yzu2Fz0eyWEHBfql3FfBEGAwA=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/assets/icons/reservation_icon.svg</key>
@@ -2968,7 +3012,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			i76uBmzHkHo4PffMpHa04adA6wxfPX715UZ83xZ+sTY=
+			dCMVGazqjOUaGsW/tFoETr17WqgSyTHrSEJEWKaTFvY=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/packages/country_code_picker/flags/ad.png</key>

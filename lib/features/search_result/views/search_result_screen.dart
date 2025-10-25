@@ -1,15 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lavescape/core/constant/app_assets.dart';
 import 'package:lavescape/core/shared/core_widgets/app_elevated_button.dart';
 import 'package:lavescape/core/shared/models/lavescape_model.dart';
 import 'package:lavescape/core/utils/colors/app_colors.dart';
 import 'package:lavescape/core/utils/styles/font_manager.dart';
+import 'package:lavescape/features/search_result/logic/search_result_cubit/search_result_cubit.dart';
 import 'package:lavescape/features/search_result/views/widgets/search_result_custom_app_bar.dart';
+import 'package:lavescape/features/search_result/views/widgets/search_result_listview_widget.dart';
 import 'package:lavescape/features/search_result/views/widgets/search_result_map_widget.dart';
 
 class SearchResultScreen extends StatelessWidget {
-  const SearchResultScreen({super.key});
+ final  String categoryName ;
+ final  String  city ; 
+ final  String  data ; 
+ final  String  numberOfAdults; 
+  const SearchResultScreen({super.key , required this.categoryName, required this.city, required this.data, required this.numberOfAdults });
 
   // Shared dummy data for both list and map views
   static const List<LavescapeModel> _dummyData = [
@@ -149,30 +156,46 @@ class SearchResultScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: SearchResultCustomAppBar(),
-      body: SearchResultMapWidget(lavescapeData: _dummyData),
-      // Padding(
-      //   padding:  EdgeInsets.symmetric(horizontal: 20.w , vertical: 10.h),
-      //   child: 
-      // ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: SizedBox(
-         width: 100.w,
-        child: AppElevatedButton(
-                        title: 'Map View',
-                        onPressed: (){
-                        },
-                        background: AppColors.kPrimaryColor,
-                        titleColor: AppColors.kWhiteColor,
-                        marginStart: 8,
-                        width: 100.w,
-                        height: 32.h,
-                        fontSize: FontSize.s14,
-                        iconStart: true,
-                        iconPath: AssetsData.mapIcon,
-                        
-                      ),
+    return BlocProvider(
+      create: (context) => SearchResultCubit(),
+      child: Scaffold(
+        appBar: SearchResultCustomAppBar(categoryName: categoryName, city: city, data: data, numberOfAdults: numberOfAdults),
+        body: BlocBuilder<SearchResultCubit, SearchResultStates>(
+          buildWhen: (previous, current) => current is ShowOrHideMapViewState,
+          builder: (context, state) {
+            return SearchResultCubit.get(context).showMapView == true
+                ? SearchResultMapWidget(lavescapeData: _dummyData)
+                : SearchResultListViewWidget(lavescapeData: _dummyData);
+          },
+        ),
+
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButton: SizedBox(
+          width: 100.w,
+          child: BlocBuilder<SearchResultCubit, SearchResultStates>(
+            buildWhen: (previous, current) => current is ShowOrHideMapViewState,
+            builder: (context, state) {
+              return AppElevatedButton(
+                title: SearchResultCubit.get(context).showMapView == true
+                    ? "List View"
+                    : 'Map View',
+                onPressed: () {
+                  SearchResultCubit.get(context).showOrHideMapView();
+                },
+                background: AppColors.kPrimaryColor,
+                titleColor: AppColors.kWhiteColor,
+                marginStart: 8,
+                width: 100.w,
+                height: 32.h,
+                fontSize: FontSize.s14,
+                iconStart: true,
+                iconPath: SearchResultCubit.get(context).showMapView == true
+                    ? AssetsData.listIcon
+                    : AssetsData.mapIcon,
+              );
+            },
+          ),
+        ),
       ),
     );
   }

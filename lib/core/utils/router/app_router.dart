@@ -29,67 +29,101 @@ abstract class AppRouter {
     routes: <RouteBase>[
       GoRoute(
         path: '/',
-        builder: (BuildContext context, GoRouterState state) {
-          return const LoginScreen();
+        pageBuilder: (BuildContext context, GoRouterState state) {
+          return buildPageWithDefaultTransition(state: state, child: const LoginScreen());
         },
       ),
       GoRoute(
         path: AppRouter.kLoginView,
-        builder: (BuildContext context, GoRouterState state) {
-          return const LoginScreen();
+        pageBuilder: (BuildContext context, GoRouterState state) {
+          return buildPageWithDefaultTransition(state: state, child: const LoginScreen());
         },
       ),
-       GoRoute(
+      GoRoute(
         path: AppRouter.kRegisterWithPhoneView,
-        builder: (BuildContext context, GoRouterState state) {
-          return const SignUpWithPhoneScreen();
+        pageBuilder: (BuildContext context, GoRouterState state) {
+          return buildPageWithDefaultTransition(state: state, child: const SignUpWithPhoneScreen());
         },
       ),
-       GoRoute(
+      GoRoute(
         path: AppRouter.kRegisterWithEmailView,
-        builder: (BuildContext context, GoRouterState state) {
-          return const SignUpWithEmailScreen();
+        pageBuilder: (BuildContext context, GoRouterState state) {
+          return buildPageWithDefaultTransition(state: state, child: const SignUpWithEmailScreen());
         },
       ),
-       GoRoute(
+      GoRoute(
         path: AppRouter.kCompleteRegisterView,
-        builder: (BuildContext context, GoRouterState state) {
-          return  CompleteSignupScreen( phoneOrEmailAndType: state.extra as Map<String, String>,);
+        pageBuilder: (BuildContext context, GoRouterState state) {
+          return buildPageWithDefaultTransition(
+            state: state,
+            child: CompleteSignupScreen(phoneOrEmailAndType: state.extra as Map<String, String>),
+          );
         },
       ),
       GoRoute(
         path: kAppLayoutView,
-        builder: (BuildContext context, GoRouterState state) {
-          return const AppLayout();
-        },
-      ),
-       GoRoute(
-        path: kSearchView,
-        builder: (BuildContext context, GoRouterState state) {
-          return const SearchScreen();
+        pageBuilder: (BuildContext context, GoRouterState state) {
+          return buildPageWithDefaultTransition(state: state, child: AppLayout());
         },
       ),
       GoRoute(
-        path: kSearchResultView ,
-        builder: (BuildContext context, GoRouterState state) {
-          return const SearchResultScreen();
+        path: kSearchView,
+        pageBuilder: (BuildContext context, GoRouterState state) {
+          return buildPageWithDefaultTransition(state: state, child: const SearchScreen());
         },
       ),
-       GoRoute(
-        path: kVerifyView,
-        builder: (BuildContext context, GoRouterState state) {
-          return VerificationScreen(
-            phoneOrEmailAndType: state.extra as Map<String, String>,
+      GoRoute(
+        path: kSearchResultView,
+        pageBuilder: (BuildContext context, GoRouterState state) {
+          Map<String, String> searchResultFilter = state.extra as Map<String, String>;
+          return buildPageWithDefaultTransition(
+            state: state,
+            child: SearchResultScreen(
+              categoryName: searchResultFilter['categoryName'] ?? '',
+              city: searchResultFilter['city'] ?? '',
+              data: searchResultFilter['date'] ?? '',
+              numberOfAdults: searchResultFilter['numberOfAdults'] ?? '',
+            ),
           );
         },
       ),
-       GoRoute(
-        path: kGuestCreatedView,
-        builder: (BuildContext context, GoRouterState state) {
-          return GuestCreatedScreen();
+      GoRoute(
+        path: kVerifyView,
+        pageBuilder: (BuildContext context, GoRouterState state) {
+          return buildPageWithDefaultTransition(
+            state: state,
+            child: VerificationScreen(
+              phoneOrEmailAndType: state.extra as Map<String, String>,
+            ),
+          );
         },
       ),
-      
+      GoRoute(
+        path: kGuestCreatedView,
+        pageBuilder: (BuildContext context, GoRouterState state) {
+          return buildPageWithDefaultTransition(state: state, child: GuestCreatedScreen());
+        },
+      ),
     ],
   );
+static CustomTransitionPage buildPageWithDefaultTransition({
+    required GoRouterState state,
+    required Widget child,
+  }) {
+    return CustomTransitionPage(
+      key: state.pageKey,
+      child: child,
+      transitionDuration: const Duration(milliseconds: 400),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        // 👇 Global transition effect for all pages
+        return FadeTransition(
+          opacity: CurvedAnimation(
+            parent: animation,
+            curve: Curves.easeInOut,
+          ),
+          child: child,
+        );
+      },
+    );
+  }
 }

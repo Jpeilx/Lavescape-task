@@ -10,7 +10,17 @@ import 'package:lavescape/core/utils/styles/text_style_manger.dart';
 
 class SearchResultCustomAppBar extends StatelessWidget
     implements PreferredSizeWidget {
-  const SearchResultCustomAppBar({super.key});
+  final String categoryName;
+  final String city;
+  final String data;
+  final String numberOfAdults;
+  const SearchResultCustomAppBar({
+    super.key,
+   required this.categoryName,
+   required this.city,
+   required this.data,
+   required this.numberOfAdults,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +66,7 @@ class SearchResultCustomAppBar extends StatelessWidget
                         child: Column(
                           children: [
                             Text(
-                              'Camel Riding',
+                              '$categoryName',
                               style: getSemiBoldStyle(
                                 fontSize: FontSize.s12,
                                 color: AppColors.kBlackTextColor,
@@ -66,42 +76,50 @@ class SearchResultCustomAppBar extends StatelessWidget
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text(
-                                  'Madina',
-                                  style: getMediumStyle(
-                                    fontSize: FontSize.s12,
-                                    color: AppColors.kOutlinedGrayColor,
-                                    fontFamily: FontConstants.interFontfamily,
+                                if (city.isNotEmpty)...[
+                                  Text(
+                                    '$city',
+                                    style: getMediumStyle(
+                                      fontSize: FontSize.s12,
+                                      color: AppColors.kOutlinedGrayColor,
+                                      fontFamily: FontConstants.interFontfamily,
+                                    ),
                                   ),
-                                ),
-                                 horizontalSpace(10),
-                                CircleAvatar(
-                                  backgroundColor: AppColors.kLightGrayColor3,
-                                  radius: 3,
-                                ),
-                                 horizontalSpace(10),
-                                Text(
-                                  'Madina',
-                                  style: getMediumStyle(
-                                    fontSize: FontSize.s12,
-                                    color: AppColors.kOutlinedGrayColor,
-                                    fontFamily: FontConstants.interFontfamily,
+                                  horizontalSpace(10),
+                                  CircleAvatar(
+                                    backgroundColor: AppColors.kLightGrayColor3,
+                                    radius: 3,
                                   ),
-                                ),
-                                horizontalSpace(10),
-                                CircleAvatar(
-                                  backgroundColor: AppColors.kLightGrayColor3,
-                                  radius: 3,
-                                ),
-                                horizontalSpace(10),
-                                Text(
-                                  'Madina',
-                                  style: getMediumStyle(
-                                    fontSize: FontSize.s12,
-                                    color: AppColors.kOutlinedGrayColor,
-                                    fontFamily: FontConstants.interFontfamily,
+                                  horizontalSpace(10),
+                                ],
+                                if (data.isNotEmpty) ...[
+                                  Text(
+                                    '$data',
+                                    style: getMediumStyle(
+                                      fontSize: FontSize.s12,
+                                      color: AppColors.kOutlinedGrayColor,
+                                      fontFamily: FontConstants.interFontfamily,
+                                    ),
                                   ),
-                                ),
+                                  horizontalSpace(10),
+                                  CircleAvatar(
+                                    backgroundColor: AppColors.kLightGrayColor3,
+                                    radius: 3,
+                                  ),
+                                  horizontalSpace(10),
+                                ],
+
+                                if (numberOfAdults.isNotEmpty) ...[
+                                  Text(
+                                    '$numberOfAdults Adults',
+                                    style: getMediumStyle(
+                                      fontSize: FontSize.s12,
+                                      color: AppColors.kOutlinedGrayColor,
+                                      fontFamily: FontConstants.interFontfamily,
+                                    ),
+                                  ),
+                                  
+                                ],
                               ],
                             ),
                           ],

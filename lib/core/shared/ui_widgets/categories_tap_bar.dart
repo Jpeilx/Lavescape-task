@@ -21,7 +21,7 @@ class CategoriesTabBar extends StatelessWidget {
   });
 
   // Category data structure
-  static const List<Map<String, String>> _categories = [
+  static const List<Map<String, String>> categories = [
     {'icon': AssetsData.flexibleIcon, 'label': 'I\'m Flexible'},
     {'icon': AssetsData.camelRidingIcon, 'label': 'Camel Riding'},
     {'icon': AssetsData.cookingClassIcon, 'label': 'Cooking Class'},
@@ -62,18 +62,18 @@ class CategoriesTabBar extends StatelessWidget {
           fontFamily: FontConstants.interFontfamily,
         ),
         tabs: List.generate(
-          _categories.length,
+          categories.length,
           (index) => Tab(
             icon: SVGAssetHandler(
               boxFit: BoxFit.fill,
-              svgPath: _categories[index]['icon']!,
+              svgPath: categories[index]['icon']!,
               svgWidth: 32.w,
               svgheight: 32.h,
               svgColor: currentIndex == index
                   ? AppColors.kPrimaryColor
                   : AppColors.kOutlinedGrayColor,
             ),
-            text: _categories[index]['label'],
+            text: categories[index]['label'],
           ),
         ),
       ),

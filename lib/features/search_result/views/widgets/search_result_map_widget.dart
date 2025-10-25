@@ -2,6 +2,7 @@ import 'dart:typed_data';
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mapbox_maps_flutter/mapbox_maps_flutter.dart';
 import 'package:lavescape/core/shared/models/lavescape_model.dart';
 import 'package:lavescape/core/shared/ui_widgets/lavescape_card_view.dart/lavescape_card_view.dart';
@@ -10,10 +11,7 @@ import 'package:lavescape/features/search_result/views/widgets/price_marker_widg
 class SearchResultMapWidget extends StatefulWidget {
   final List<LavescapeModel> lavescapeData;
 
-  const SearchResultMapWidget({
-    super.key,
-    this.lavescapeData = const [],
-  });
+  const SearchResultMapWidget({super.key, this.lavescapeData = const []});
 
   @override
   State<SearchResultMapWidget> createState() => _SearchResultMapWidgetState();
@@ -25,11 +23,9 @@ class _SearchResultMapWidgetState extends State<SearchResultMapWidget> {
   int? selectedMarkerIndex;
   List<PointAnnotation> annotations = [];
   LavescapeModel? selectedLavescapeData;
+  Cancelable? _tapCancelable;
 
-  @override
-  void initState() {
-    super.initState();
-  }
+  
 
   void _onMapCreated(MapboxMap mapboxMap) {
     this.mapboxMap = mapboxMap;
@@ -40,10 +36,18 @@ class _SearchResultMapWidgetState extends State<SearchResultMapWidget> {
     if (mapboxMap == null || widget.lavescapeData.isEmpty) return;
 
     // Create annotation manager
-    pointAnnotationManager =
-        await mapboxMap!.annotations.createPointAnnotationManager();
+    pointAnnotationManager = await mapboxMap!.annotations
+        .createPointAnnotationManager();
 
-    // Create markers for each location
+    _tapCancelable = pointAnnotationManager!.tapEvents(
+      onTap: (annotation) {
+        final index = annotations.indexOf(annotation);
+        if (index != -1) {
+          final data = widget.lavescapeData[index];
+          _showLavescapeCard(data, index);
+        }
+      },
+    );
     await _addMarkers();
   }
 
@@ -55,17 +59,12 @@ class _SearchResultMapWidgetState extends State<SearchResultMapWidget> {
 
       // Convert marker widget to image
       final imageData = await _widgetToImage(
-        PriceMarkerWidget(
-          price: data.price,
-          isSelected: false,
-        ),
+        PriceMarkerWidget(price: data.price, isSelected: false),
       );
 
       // Create annotation options
       final options = PointAnnotationOptions(
-        geometry: Point(
-          coordinates: Position(data.longitude, data.latitude),
-        ),
+        geometry: Point(coordinates: Position(data.longitude, data.latitude)),
         image: imageData,
         iconSize: 1.0,
       );
@@ -73,32 +72,6 @@ class _SearchResultMapWidgetState extends State<SearchResultMapWidget> {
       // Create and store the annotation
       final annotation = await pointAnnotationManager!.create(options);
       annotations.add(annotation);
-    }
-  }
-
-  Future<void> _onMapTapped(MapContentGestureContext context) async {
-    // Get the screen coordinate where the user tapped
-    final screenPoint = ScreenCoordinate(
-      x: context.point.coordinates.lng.toDouble(),
-      y: context.point.coordinates.lat.toDouble(),
-    );
-
-    // Use the map to convert screen point to geographic coordinate
-    if (mapboxMap != null) {
-      final coordinate = await mapboxMap!.coordinateForPixel(screenPoint);
-
-      // Check if tap is near any marker
-      for (int i = 0; i < widget.lavescapeData.length; i++) {
-        final data = widget.lavescapeData[i];
-        // Check if tapped coordinate is close to this marker (within ~100 meters)
-        final latDiff = (data.latitude - coordinate.coordinates.lat).abs();
-        final lngDiff = (data.longitude - coordinate.coordinates.lng).abs();
-
-        if (latDiff < 0.001 && lngDiff < 0.001) {
-          _showLavescapeCard(data, i);
-          break;
-        }
-      }
     }
   }
 
@@ -138,10 +111,7 @@ class _SearchResultMapWidgetState extends State<SearchResultMapWidget> {
         textDirection: TextDirection.ltr,
         child: MediaQuery(
           data: MediaQueryData.fromView(view),
-          child: Material(
-            type: MaterialType.transparency,
-            child: widget,
-          ),
+          child: Material(type: MaterialType.transparency, child: widget),
         ),
       ),
     ).attachToRenderTree(buildOwner);
@@ -153,10 +123,20 @@ class _SearchResultMapWidgetState extends State<SearchResultMapWidget> {
     pipelineOwner.flushCompositingBits();
     pipelineOwner.flushPaint();
 
-    final image = await repaintBoundary.toImage(pixelRatio: view.devicePixelRatio);
+    final image = await repaintBoundary.toImage(
+      pixelRatio: view.devicePixelRatio,
+    );
     final byteData = await image.toByteData(format: ui.ImageByteFormat.png);
 
     return byteData!.buffer.asUint8List();
+  }
+
+  @override
+  void dispose() {
+    _tapCancelable?.cancel();
+    pointAnnotationManager?.deleteAll();
+    annotations.clear();
+    super.dispose();
   }
 
   @override
@@ -180,35 +160,60 @@ class _SearchResultMapWidgetState extends State<SearchResultMapWidget> {
           ),
           styleUri: MapboxStyles.STANDARD,
           onMapCreated: _onMapCreated,
-          onTapListener: _onMapTapped,
+        ),
+         if (selectedLavescapeData != null)
+        Positioned.fill(
+          child: GestureDetector(
+            behavior: HitTestBehavior.translucent,
+            onTap: () {
+              setState(() {
+                selectedLavescapeData = null;
+                selectedMarkerIndex = null;
+              });
+            },
+            child: Container(
+              color: Colors.transparent, // makes it tappable but invisible
+            ),
+          ),
         ),
         if (selectedLavescapeData != null)
           Positioned(
-            left: 16,
-            right: 16,
+            left: 20.w,
+            right: 20.w,
             bottom: 80,
-            child: GestureDetector(
-              onTap: () {
-                setState(() {
-                  selectedLavescapeData = null;
-                  selectedMarkerIndex = null;
-                });
-              },
-              child: 
-               LavescapeCardView(
-                    lavescapeData: selectedLavescapeData,
+            child: AnimatedSwitcher(
+              duration: const Duration(milliseconds: 400),
+              transitionBuilder: (child, animation) {
+                final curved = CurvedAnimation(
+                  parent: animation,
+                  curve: Curves.easeOutBack,
+                );
+                return FadeTransition(
+                  opacity: curved,
+                  child: SlideTransition(
+                    position: Tween<Offset>(
+                      begin: const Offset(0, 0.3), // slides up slightly
+                      end: Offset.zero,
+                    ).animate(curved),
+                    child: ScaleTransition(
+                      scale: Tween<double>(
+                        begin: 0.95,
+                        end: 1.0,
+                      ).animate(curved),
+                      child: child,
+                    ),
                   ),
-                ),
-              
-          
+                );
+              },
+              child: LavescapeCardView(
+                key: ValueKey(
+                  selectedLavescapeData?.price,
+                ), // make sure it animates properly
+                lavescapeData: selectedLavescapeData,
+              ),
+            ),
           ),
       ],
     );
-  }
-
-  @override
-  void dispose() {
-    annotations.clear();
-    super.dispose();
   }
 }

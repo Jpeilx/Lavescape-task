@@ -5,21 +5,11 @@ import 'package:lavescape/core/utils/colors/app_colors.dart';
 import 'package:lavescape/core/utils/styles/font_manager.dart';
 import 'package:lavescape/core/utils/styles/text_style_manger.dart';
 
-class LocationInputWidget extends StatefulWidget {
-  final TextEditingController controller;
 
-  const LocationInputWidget({
-    super.key,
-    required this.controller,
-    
-  });
-
-  @override
-  State<LocationInputWidget> createState() => _LocationInputWidgetState();
-}
-
-class _LocationInputWidgetState extends State<LocationInputWidget> {
-   final List<String> cities = [
+class LocationInputWidget extends StatelessWidget{
+  final ValueChanged<String?>? onCityChanged;
+  final String? selectedCity;
+   final List<String> cities = const  [
     'Riyadh',
     'Jeddah',
     'Dammam',
@@ -39,7 +29,9 @@ class _LocationInputWidgetState extends State<LocationInputWidget> {
     'Sakaka',
   ];
 
-  String? selectedBrand;
+  const LocationInputWidget({super.key , required this.onCityChanged , required this.selectedCity} );
+
+  
 
   @override
   Widget build(BuildContext context) {
@@ -66,12 +58,8 @@ class _LocationInputWidgetState extends State<LocationInputWidget> {
                             ),
                           ))
                       .toList(),
-                  value: selectedBrand,
-                  onChanged: (String? value) {
-                    setState(() {
-                      selectedBrand = value;
-                    });
-                  },
+                  value: selectedCity,
+                  onChanged: onCityChanged,
                   
                   buttonStyleData: ButtonStyleData(
                     height: 44.h,

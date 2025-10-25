@@ -41,6 +41,7 @@ class AssetsData {
   static const String keyIcon = 'assets/icons/key_icon.svg';
   static const String authCalendarIcon = 'assets/icons/auth_calendar_icon.svg';
   static const String checkmarkIcon = 'assets/icons/checkmark_icon.svg';
+  static const String listIcon = 'assets/icons/list_icon.svg';
   
 
 }

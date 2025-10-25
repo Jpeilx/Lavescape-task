@@ -3,8 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:lavescape/core/network/local/cache_helper.dart';
-import 'package:lavescape/core/network/remote/dio_helper/dio_helper.dart';
+//import 'package:lavescape/core/network/local/cache_helper.dart';
+//import 'package:lavescape/core/network/remote/dio_helper/dio_helper.dart';
 import 'package:lavescape/core/services/service_locator.dart';
 import 'package:lavescape/core/shared/core_widgets/bloc_observer.dart';
 import 'package:lavescape/core/utils/colors/app_colors.dart';
@@ -17,8 +17,8 @@ Future<void> main() async {
   await ScreenUtil.ensureScreenSize();
   final String accessToken = const String.fromEnvironment('ACCESS_TOKEN');
   Mapbox.MapboxOptions.setAccessToken(accessToken);
-  DioHelper.init();
-  await CacheHelper.init();
+ // DioHelper.init();
+  //await CacheHelper.init();
   Bloc.observer = MyBlocObserver();
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
@@ -30,8 +30,11 @@ Future<void> main() async {
   );
   setUpServiceLocator();
 
-  await dotenv.load(fileName: ".env");
-  Mapbox. MapboxOptions.setAccessToken(dotenv.env['MAPBOX_ACCESS_TOKEN']!);
+  dotenv.load(fileName: ".env").then((value) {
+    //print('.env load value');
+    Mapbox.MapboxOptions.setAccessToken(dotenv.env['MAPBOX_ACCESS_TOKEN']!);
+  });
+
   runApp(const MyApp());
 }
 

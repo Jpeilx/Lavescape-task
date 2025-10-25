@@ -10,6 +10,7 @@ import 'package:lavescape/core/utils/styles/text_style_manger.dart';
 class GuestDetailsWidget extends StatelessWidget {
   final int adults;
   final int children;
+ 
   final VoidCallback onAdultsIncrement;
   final VoidCallback onAdultsDecrement;
   final VoidCallback onChildrenIncrement;
@@ -23,6 +24,7 @@ class GuestDetailsWidget extends StatelessWidget {
     required this.onAdultsDecrement,
     required this.onChildrenIncrement,
     required this.onChildrenDecrement,
+  
   });
 
   Widget _buildCounterRow({
@@ -31,6 +33,7 @@ class GuestDetailsWidget extends StatelessWidget {
     required int count,
     required VoidCallback onIncrement,
     required VoidCallback onDecrement,
+     required bool isAdultCounter 
   }) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 8.h ),
@@ -62,16 +65,16 @@ class GuestDetailsWidget extends StatelessWidget {
           Row(
             children: [
               InkWell(
-                onTap: count > 0 ? onDecrement : null,
+                onTap: isAdultCounter ? (count > 1 ? onDecrement : null):(count > 0 ? onDecrement : null),
                 child: Container(
                   width: 32.w,
                   height: 32.h,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     border: Border.all(
-                      color: count > 0
-                          ? AppColors.kBorderColor
-                          : AppColors.kLightGrayColor,
+                      color: isAdultCounter
+                          ? (count > 1 ? AppColors.kBorderColor : AppColors.kLightGrayColor)
+                          : (count > 0 ? AppColors.kBorderColor : AppColors.kLightGrayColor),
                       width: 1,
                     ),
                   ),
@@ -80,9 +83,11 @@ class GuestDetailsWidget extends StatelessWidget {
                             svgPath: AssetsData.minusIcon,
                             svgWidth: 20.w,
                             svgheight: 20.h,
-                          svgColor:   count > 0
+                          svgColor:isAdultCounter ?  ( count > 1
                         ? AppColors.kBlackTextColor
-                        : AppColors.kLightGrayColor,
+                        : AppColors.kLightGrayColor):( count > 0
+                        ? AppColors.kBlackTextColor
+                        : AppColors.kLightGrayColor),
                           ),
                  
                 ),
@@ -166,6 +171,7 @@ class GuestDetailsWidget extends StatelessWidget {
             count: adults,
             onIncrement: onAdultsIncrement,
             onDecrement: onAdultsDecrement,
+            isAdultCounter: true
           ),
           verticalSpace(16),
           Divider(
@@ -179,6 +185,7 @@ class GuestDetailsWidget extends StatelessWidget {
             count: children,
             onIncrement: onChildrenIncrement,
             onDecrement: onChildrenDecrement,
+            isAdultCounter: false 
           ),
         ],
       ),

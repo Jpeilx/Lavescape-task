@@ -24,9 +24,7 @@ class AppLayout extends StatelessWidget {
             body: layoutCubit
                 .supermarketScreens[layoutCubit.currentButtomNavIndex],
             bottomNavigationBar: Container(
-              height: 100.h,
-             
-              decoration:  BoxDecoration(
+               decoration:  BoxDecoration(
                 border: Border.all(color: AppColors.kBorderColor),
                 boxShadow: <BoxShadow>[
                   BoxShadow(

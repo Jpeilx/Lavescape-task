@@ -48,26 +48,21 @@ class _CardImageCarouselWidgetState extends State<CardImageCarouselWidget> {
     return Stack(
       children: [
         // Image PageView
-        ClipRRect(
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(12.r),
-            topRight: Radius.circular(12.r),
-          ),
-          child: SizedBox(
-            height: 334.h,
-            child: PageView.builder(
-              controller: _pageController,
-              itemCount: widget.lavescapeData?.imageUrls.length ?? 0,
-              itemBuilder: (context, index) {
-                return AppCachedImage(
-                  url: widget.lavescapeData?.imageUrls[index] ?? '',
-                  width: 353.w,
-                  height: 334.h,
-                  boxfit: BoxFit.cover,
-                  boxShap: BoxShape.rectangle,
-                );
-              },
-            ),
+        SizedBox(
+          height: 334.h,
+          child: PageView.builder(
+            controller: _pageController,
+            itemCount: widget.lavescapeData?.imageUrls.length ?? 0,
+            itemBuilder: (context, index) {
+              return AppCachedImage(
+                url: widget.lavescapeData?.imageUrls[index] ?? '',
+                width: 353.w,
+                height: 334.h,
+                boxfit: BoxFit.cover,
+                boxShap: BoxShape.rectangle,
+                raduis: 12,
+              );
+            },
           ),
         ),
 

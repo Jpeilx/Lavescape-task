@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:lavescape/core/shared/core_widgets/app_elevated_button.dart';
 import 'package:lavescape/core/shared/ui_widgets/categories_tap_bar.dart';
 import 'package:lavescape/core/utils/colors/app_colors.dart';
+import 'package:lavescape/core/utils/functions/repeated_functions.dart';
 import 'package:lavescape/core/utils/helper/spacing.dart';
 import 'package:lavescape/core/utils/router/app_router.dart';
 import 'package:lavescape/core/utils/styles/font_manager.dart';
@@ -25,7 +26,7 @@ class _SearchScreenState extends State<SearchScreen>
     with SingleTickerProviderStateMixin {
   late TabController tabController;
   late TextEditingController searchController;
-  late TextEditingController locationController;
+  String? city ;
 
   int currentTabIndex = 0;
   bool isLoading = false;
@@ -40,7 +41,6 @@ class _SearchScreenState extends State<SearchScreen>
   void initState() {
     super.initState();
     searchController = TextEditingController();
-    locationController = TextEditingController(text: 'Medina');
     tabController = TabController(length: 6, vsync: this);
     tabController.addListener(() {
       if (tabController.indexIsChanging) {
@@ -67,28 +67,35 @@ class _SearchScreenState extends State<SearchScreen>
   @override
   void dispose() {
     searchController.dispose();
-    locationController.dispose();
+  
     tabController.dispose();
     super.dispose();
   }
 
   void _handleClear() {
     setState(() {
-      locationController.clear();
+   
       selectedDateRange = null;
       adultsCount = 2;
       childrenCount = 0;
+      city = null ;
       showGuestDetails = false;
     });
   }
 
   void _handleSearch() {
+    print(CategoriesTabBar.categories[currentTabIndex]['label']?? '');
+    print(city);
+    print(adultsCount);
+    print(childrenCount);
+    print('Selected data $selectedDateRange');
     GoRouter.of(context).push(AppRouter.kSearchResultView, extra: {
-      'location': locationController.text,
-      'dateRange': selectedDateRange,
-      'adults': adultsCount,
-      'children': childrenCount,
-    });
+      'categoryName' : CategoriesTabBar.categories[currentTabIndex]['label']?? '',
+      'city': city??'',
+      'date': selectedDateRange == null ? '' : RepeatedFunctions.formatDateRange(selectedDateRange) ,
+      'numberOfAdults':  adultsCount == 0 ? '' : '$adultsCount',
+      'children': childrenCount  == 0 ? '' : '$childrenCount',
+    } );
   }
 
   int get _totalGuests => adultsCount + childrenCount;
@@ -108,14 +115,14 @@ class _SearchScreenState extends State<SearchScreen>
                 currentTabIndex = index;
                 isLoading = true;
               });
-              // Simulate loading data
-              Future.delayed(const Duration(milliseconds: 500), () {
-                if (mounted) {
-                  setState(() {
-                    isLoading = false;
-                  });
-                }
-              });
+              // // Simulate loading data
+              // Future.delayed(const Duration(milliseconds: 500), () {
+              //   if (mounted) {
+              //     setState(() {
+              //       isLoading = false;
+              //     });
+              //   }
+              // });
             },
           ),
 
@@ -124,7 +131,11 @@ class _SearchScreenState extends State<SearchScreen>
               child: Column(
                 children: [
                   verticalSpace(20),
-                  LocationInputWidget(controller: locationController),
+                  LocationInputWidget(onCityChanged: (String? value) { 
+                   setState(() {
+                     city= value ?? '';
+                   });
+                  }, selectedCity: city,),
                   verticalSpace(12),
 
                   // Date range picker
@@ -133,6 +144,7 @@ class _SearchScreenState extends State<SearchScreen>
                     onDateRangeChanged: (range) {
                       setState(() {
                         selectedDateRange = range;
+                       
                       });
                     },
                   ),
